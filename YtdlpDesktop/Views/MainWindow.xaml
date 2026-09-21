@@ -1,0 +1,143 @@
+<Window x:Class="YtdlpDesktop.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:YtdlpDesktop.Views"
+        Title="LAZARUS DOWNLOADER YOUTUBE" Height="620" Width="680"
+        Background="#050608" WindowStartupLocation="CenterScreen" Opacity="0"
+        Icon="/Assets/logo.ico">
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.6">
+                        <DoubleAnimation.EasingFunction>
+                            <CubicEase EasingMode="EaseOut" />
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Window.Resources>
+        <!-- TabItem Style (Neon Theme) -->
+        <Style TargetType="TabItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border Name="Border" Padding="10,6" BorderThickness="0,0,0,2" BorderBrush="Transparent" Margin="0,0,16,0" Cursor="Hand">
+                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#38E4B7" />
+                                <Setter Property="Foreground" Value="#38E4B7" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter Property="Foreground" Value="#6B7280" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="False"/>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" Value="#D1D5DB" />
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Base TextBox/ComboBox styling -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#1A1E26"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#4d38E4B7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="4">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="0"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="#38E4B7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#0b0d14" BorderBrush="#1f2937" BorderThickness="0,0,0,1" Padding="20,16">
+            <Grid>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="LAZARUS " FontSize="22" FontWeight="Black" Foreground="White" />
+                    <TextBlock Text="DOWNLOADER" FontSize="22" FontWeight="Light" Foreground="#A855F7" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding MensajeActualizacion}" Foreground="#38E4B7" VerticalAlignment="Center" Margin="0,0,12,0" FontSize="11" FontWeight="SemiBold"/>
+                    <Button Content="↻ Actualizar Motor" Command="{Binding ActualizarYtDlpCommand}"
+                            IsEnabled="{Binding EstaActualizando, Converter={StaticResource InversoBooleano}}"
+                            Background="#1f2937" Foreground="#A855F7" BorderBrush="#374151" BorderThickness="1" 
+                            Padding="12,6" FontWeight="SemiBold" Cursor="Hand" ToolTip="Descarga la última versión del código de YouTube">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="4"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Tab Control -->
+        <Border Grid.Row="1" Background="#11141A" Margin="24,20,24,0" CornerRadius="8,8,0,0" BorderBrush="#1f2937" BorderThickness="1,1,1,0">
+            <TabControl Margin="20,16,20,0" Background="Transparent" BorderThickness="0">
+                <TabItem Header="AUDIO">
+                    <local:AudioView DataContext="{Binding Audio}" />
+                </TabItem>
+                <TabItem Header="VIDEO">
+                    <local:VideoView DataContext="{Binding Video}" />
+                </TabItem>
+            </TabControl>
+        </Border>
+
+        <!-- Footer -->
+        <Border Grid.Row="2" Background="#0b0d14" Padding="24,12" BorderBrush="#1f2937" BorderThickness="0,1,0,0">
+            <DockPanel LastChildFill="True">
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="NAVEGADOR (COOKIES):" Foreground="#6B7280" FontWeight="Bold" FontSize="10" VerticalAlignment="Center" Margin="16,0,8,0" />
+                    <ComboBox ItemsSource="{Binding NavegadoresDisponibles}"
+                              SelectedItem="{Binding NavegadorCookiesSeleccionado, UpdateSourceTrigger=PropertyChanged}"
+                              Width="100" Background="#1A1E26" Foreground="Black" BorderBrush="#4d38E4B7" BorderThickness="1" Padding="4,2" Cursor="Hand" />
+                    
+                    <Button Content="Cambiar Destino..." Command="{Binding CambiarCarpetaCommand}" 
+                            Padding="12,4" Margin="16,0,0,0" Background="#1f2937" Foreground="White" BorderBrush="#374151" BorderThickness="1" 
+                            FontWeight="SemiBold" Cursor="Hand" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                </StackPanel>
+                <TextBlock Text="DESTINO:" Foreground="#6B7280" FontWeight="Bold" FontSize="11" VerticalAlignment="Center" Margin="0,0,8,0" />
+                <TextBlock Text="{Binding CarpetaDestino}" Foreground="#D1D5DB" FontFamily="Consolas" FontSize="12" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>

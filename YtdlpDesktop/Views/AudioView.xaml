@@ -1,0 +1,90 @@
+<UserControl x:Class="YtdlpDesktop.Views.AudioView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Margin="8">
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+            <TextBlock Text="◆ " Foreground="#A855F7" FontSize="20"/>
+            <TextBlock Text="Descargar audio" FontSize="24" FontWeight="Bold" Foreground="White" />
+        </StackPanel>
+        <TextBlock Text="Pega el link, elige el formato y listo."
+                   Foreground="#9CA3AF" Margin="0,0,0,24" TextWrapping="Wrap" />
+
+        <TextBlock Text="LINK DE YOUTUBE" FontSize="10" FontWeight="Bold" Foreground="#38E4B7" Margin="0,0,0,6" />
+        <!-- Uses the TextBox style defined in MainWindow -->
+        <TextBox Text="{Binding Url, UpdateSourceTrigger=PropertyChanged}"
+                 IsEnabled="{Binding EstaOcupado, Converter={StaticResource InversoBooleano}}" />
+
+        <TextBlock Text="FORMATO" FontSize="10" FontWeight="Bold" Foreground="#A855F7" Margin="0,20,0,6" />
+        <!-- Simple ComboBox styling to match -->
+        <ComboBox ItemsSource="{Binding FormatosDisponibles}"
+                  SelectedItem="{Binding FormatoSeleccionado}"
+                  Padding="8" Background="#1A1E26" Foreground="Black" BorderBrush="#4dA855F7" BorderThickness="1" />
+
+        <Button Content="{Binding EstaOcupado, Converter={StaticResource TextoBotonDescarga}}"
+                Command="{Binding DescargarCommand}"
+                IsEnabled="{Binding EstaOcupado, Converter={StaticResource InversoBooleano}}"
+                Margin="0,32,0,0" Padding="12,12" BorderThickness="0" Foreground="Black" FontWeight="Black" FontSize="14" Cursor="Hand">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FFD700" Offset="0" />
+                    <GradientStop Color="#FF8C00" Offset="1" />
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <EventTrigger RoutedEvent="MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.8" Duration="0:0:0.15" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1.0" Duration="0:0:0.25" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <ProgressBar Minimum="0" Maximum="100" Value="{Binding Progreso}" Height="6" Margin="0,20,0,0" 
+                     Visibility="{Binding EstaOcupado, Converter={StaticResource BooleanoAVisibilidad}}"
+                     BorderBrush="#1f2937" BorderThickness="1" Background="#0b0d14">
+            <ProgressBar.Foreground>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#38E4B7" Offset="0"/>
+                    <GradientStop Color="#A855F7" Offset="1"/>
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
+
+        <TextBlock Text="{Binding MensajeEstado}"
+                   Foreground="{Binding EsError, Converter={StaticResource ColorEstado}}"
+                   Margin="0,8,0,0" TextWrapping="Wrap" FontWeight="SemiBold" />
+
+        <Button Content="📁 Abrir archivo descargado" Command="{Binding AbrirCarpetaCommand}"
+                Visibility="{Binding DescargaCompletada, Converter={StaticResource BooleanoAVisibilidad}}"
+                Background="#1f2937" Foreground="White" BorderBrush="#38E4B7" BorderThickness="1"
+                Padding="12,6" Margin="0,12,0,0" HorizontalAlignment="Left" Cursor="Hand" FontWeight="SemiBold">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </StackPanel>
+</UserControl>
