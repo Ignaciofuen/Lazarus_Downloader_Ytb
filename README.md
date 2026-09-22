@@ -56,7 +56,19 @@ El proyecto fue estructurado utilizando el patrón de diseño **MVVM** (Model-Vi
 
 ---
 
-## 📦 Instalación y Compilación (Para Desarrolladores)
+## 📥 Descarga y Uso Rápido (Usuarios)
+
+**¡No necesitas instalar nada!** Esta aplicación es 100% portable.
+
+1. Ve a la sección **[Releases](https://github.com/Ignaciofuen/Lazarus_Downloader_Ytb/releases)** (Lanzamientos) en la parte derecha de esta página.
+2. Descarga el archivo más reciente (ej. `Lazarus_Downloader_v1.0.zip`).
+3. Extrae la carpeta (`Clic derecho -> Extraer todo...`).
+4. Abre la carpeta extraída y dale doble clic a **`YtdlpDesktop.exe`**.
+*(Nota: No borres ni muevas los otros archivos `.exe` que vienen en la carpeta, el programa los usa en segundo plano para procesar tus descargas).*
+
+---
+
+## 📦 Compilación (Para Desarrolladores)
 
 Si deseas clonar y compilar este proyecto tú mismo:
 
