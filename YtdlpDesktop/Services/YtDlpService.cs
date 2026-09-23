@@ -102,6 +102,10 @@ public class YtDlpService
             {
                 msjError = "ATENCIÓN: Tu navegador está bloqueando las cookies.\nCierra tu navegador (Chrome/Edge/Brave) por completo e inténtalo de nuevo. O mejor aún, usa 'firefox' en el menú de abajo, ya que no tiene este problema.";
             }
+            else if (msjError.Contains("Failed to decrypt with DPAPI", StringComparison.OrdinalIgnoreCase))
+            {
+                msjError = "ATENCIÓN: Las nuevas versiones de Chrome/Edge/Brave bloquean el acceso a las cookies por seguridad.\nPor favor, selecciona 'firefox' en el menú de navegadores de abajo, ya que no tiene este problema.";
+            }
             else if (msjError.Contains("JavaScript runtime", StringComparison.OrdinalIgnoreCase))
             {
                 msjError = "ATENCIÓN: Falla de protección de YouTube. Falta el motor Deno o Node.js para resolver el desafío de YouTube.";
