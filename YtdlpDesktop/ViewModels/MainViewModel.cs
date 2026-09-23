@@ -27,6 +27,7 @@ public partial class MainViewModel : ObservableObject
     public List<string> NavegadoresDisponibles { get; } = new() { "Ninguno", "chrome", "edge", "firefox", "brave", "opera", "vivaldi" };
 
     private readonly string _settingsPath = Path.Combine(AppContext.BaseDirectory, "browser.txt");
+    private readonly string _cookiesSettingsPath = Path.Combine(AppContext.BaseDirectory, "cookies_path.txt");
 
     public MainViewModel(AudioViewModel audio, VideoViewModel video, YtDlpService servicio)
     {
@@ -47,6 +48,16 @@ public partial class MainViewModel : ObservableObject
         }
 
         _servicio.NavegadorCookies = _navegadorCookiesSeleccionado == "Ninguno" ? null : _navegadorCookiesSeleccionado;
+
+        if (File.Exists(_cookiesSettingsPath))
+        {
+            var rutaGuardada = File.ReadAllText(_cookiesSettingsPath).Trim();
+            if (File.Exists(rutaGuardada))
+            {
+                _archivoCookies = rutaGuardada;
+                _servicio.RutaArchivoCookies = _archivoCookies;
+            }
+        }
     }
 
     partial void OnNavegadorCookiesSeleccionadoChanged(string value)
@@ -103,6 +114,7 @@ public partial class MainViewModel : ObservableObject
         {
             ArchivoCookies = dialog.FileName;
             _servicio.RutaArchivoCookies = ArchivoCookies;
+            try { File.WriteAllText(_cookiesSettingsPath, ArchivoCookies); } catch { }
         }
     }
 
@@ -111,6 +123,7 @@ public partial class MainViewModel : ObservableObject
     {
         ArchivoCookies = null;
         _servicio.RutaArchivoCookies = null;
+        try { File.Delete(_cookiesSettingsPath); } catch { }
     }
 
     [RelayCommand]
