@@ -133,6 +133,12 @@
                             Padding="8,2" Background="#1f2937" Foreground="#38E4B7" BorderBrush="#374151" BorderThickness="1" 
                             FontWeight="SemiBold" Cursor="Hand" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                             ToolTip="Si Chrome bloquea las descargas, usa la extensión 'Get cookies.txt LOCALLY' para descargar tus cookies y cárgalas aquí."/>
+                            
+                    <Button Content="Extensión Chrome 🌐" Command="{Binding DescargarExtensionCommand}" 
+                            Visibility="{Binding ArchivoCookies, Converter={StaticResource InversoTextoAVisibilidad}}"
+                            Padding="8,2" Margin="8,0,0,0" Background="#1A1E26" Foreground="#A855F7" BorderBrush="#A855F7" BorderThickness="1" 
+                            FontWeight="SemiBold" Cursor="Hand" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                            ToolTip="Haz clic aquí para ir a la tienda de Chrome e instalar la extensión necesaria."/>
                     
                     <StackPanel Orientation="Horizontal" Visibility="{Binding ArchivoCookies, Converter={StaticResource TextoAVisibilidad}}">
                         <TextBlock Text="Cargado" Foreground="#38E4B7" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,4,0"/>

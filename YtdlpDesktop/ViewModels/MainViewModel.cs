@@ -114,6 +114,21 @@ public partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private void DescargarExtension()
+    {
+        try
+        {
+            var psi = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpocingladond",
+                UseShellExecute = true
+            };
+            System.Diagnostics.Process.Start(psi);
+        }
+        catch { }
+    }
+
+    [RelayCommand]
     private void CambiarCarpeta()
     {
         var dialog = new OpenFolderDialog
