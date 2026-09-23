@@ -47,6 +47,15 @@ public class StringToVisibilityConverter : IValueConverter
         throw new NotSupportedException();
 }
 
+public class InverseStringToVisibilityConverter : IValueConverter
+{
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
+        string.IsNullOrWhiteSpace(value as string) ? Visibility.Visible : Visibility.Collapsed;
+
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
+        throw new NotSupportedException();
+}
+
 /// <summary>true -> Visible, false -> Collapsed.</summary>
 public class BooleanToVisibilityConverter : IValueConverter
 {

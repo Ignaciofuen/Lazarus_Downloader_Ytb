@@ -126,10 +126,22 @@
         <Border Grid.Row="2" Background="#0b0d14" Padding="24,12" BorderBrush="#1f2937" BorderThickness="0,1,0,0">
             <DockPanel LastChildFill="True">
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="NAVEGADOR (COOKIES):" Foreground="#6B7280" FontWeight="Bold" FontSize="10" VerticalAlignment="Center" Margin="16,0,8,0" />
+                    <TextBlock Text="TXT COOKIES:" Foreground="#6B7280" FontWeight="Bold" FontSize="10" VerticalAlignment="Center" Margin="16,0,8,0" />
+                    
+                    <Button Content="Cargar Archivo..." Command="{Binding CargarArchivoCookiesCommand}" 
+                            Visibility="{Binding ArchivoCookies, Converter={StaticResource InversoTextoAVisibilidad}}"
+                            Padding="8,2" Background="#1f2937" Foreground="#38E4B7" BorderBrush="#374151" BorderThickness="1" 
+                            FontWeight="SemiBold" Cursor="Hand" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                    
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding ArchivoCookies, Converter={StaticResource TextoAVisibilidad}}">
+                        <TextBlock Text="Cargado" Foreground="#38E4B7" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                        <Button Content="❌" Command="{Binding QuitarArchivoCookiesCommand}" Foreground="#EF4444" Background="Transparent" BorderThickness="0" Cursor="Hand" Padding="2,0"/>
+                    </StackPanel>
+
+                    <TextBlock Text="NAVEGADOR:" Foreground="#6B7280" FontWeight="Bold" FontSize="10" VerticalAlignment="Center" Margin="16,0,8,0" />
                     <ComboBox ItemsSource="{Binding NavegadoresDisponibles}"
                               SelectedItem="{Binding NavegadorCookiesSeleccionado, UpdateSourceTrigger=PropertyChanged}"
-                              Width="100" Background="#1A1E26" Foreground="Black" BorderBrush="#4d38E4B7" BorderThickness="1" Padding="4,2" Cursor="Hand" />
+                              Width="80" Background="#1A1E26" Foreground="White" BorderBrush="#4d38E4B7" BorderThickness="1" Padding="4,2" Cursor="Hand" />
                     
                     <Button Content="Cambiar Destino..." Command="{Binding CambiarCarpetaCommand}" 
                             Padding="12,4" Margin="16,0,0,0" Background="#1f2937" Foreground="White" BorderBrush="#374151" BorderThickness="1" 

@@ -7,6 +7,7 @@
         <conv:BusyToButtonTextConverter x:Key="TextoBotonDescarga" />
         <conv:ErrorToBrushConverter x:Key="ColorEstado" />
         <conv:StringToVisibilityConverter x:Key="TextoAVisibilidad" />
+        <conv:InverseStringToVisibilityConverter x:Key="InversoTextoAVisibilidad" />
         <conv:BooleanToVisibilityConverter x:Key="BooleanoAVisibilidad" />
     </Application.Resources>
 </Application>

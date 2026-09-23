@@ -87,6 +87,32 @@ public partial class MainViewModel : ObservableObject
         }
     }
 
+    [ObservableProperty]
+    private string? _archivoCookies;
+
+    [RelayCommand]
+    private void CargarArchivoCookies()
+    {
+        var dialog = new OpenFileDialog
+        {
+            Title = "Selecciona el archivo cookies.txt",
+            Filter = "Archivos de texto (*.txt)|*.txt|Todos los archivos (*.*)|*.*"
+        };
+
+        if (dialog.ShowDialog() == true)
+        {
+            ArchivoCookies = dialog.FileName;
+            _servicio.RutaArchivoCookies = ArchivoCookies;
+        }
+    }
+
+    [RelayCommand]
+    private void QuitarArchivoCookies()
+    {
+        ArchivoCookies = null;
+        _servicio.RutaArchivoCookies = null;
+    }
+
     [RelayCommand]
     private void CambiarCarpeta()
     {
