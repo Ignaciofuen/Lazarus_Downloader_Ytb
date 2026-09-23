@@ -120,7 +120,7 @@ public partial class MainViewModel : ObservableObject
         {
             var psi = new System.Diagnostics.ProcessStartInfo
             {
-                FileName = "https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpocingladond",
+                FileName = "https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc",
                 UseShellExecute = true
             };
             System.Diagnostics.Process.Start(psi);
