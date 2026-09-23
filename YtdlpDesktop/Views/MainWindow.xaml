@@ -131,7 +131,8 @@
                     <Button Content="Cargar Archivo..." Command="{Binding CargarArchivoCookiesCommand}" 
                             Visibility="{Binding ArchivoCookies, Converter={StaticResource InversoTextoAVisibilidad}}"
                             Padding="8,2" Background="#1f2937" Foreground="#38E4B7" BorderBrush="#374151" BorderThickness="1" 
-                            FontWeight="SemiBold" Cursor="Hand" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                            FontWeight="SemiBold" Cursor="Hand" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                            ToolTip="Si Chrome bloquea las descargas, usa la extensión 'Get cookies.txt LOCALLY' para descargar tus cookies y cárgalas aquí."/>
                     
                     <StackPanel Orientation="Horizontal" Visibility="{Binding ArchivoCookies, Converter={StaticResource TextoAVisibilidad}}">
                         <TextBlock Text="Cargado" Foreground="#38E4B7" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,4,0"/>

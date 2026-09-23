@@ -13,10 +13,9 @@ namespace YtdlpDesktop.Services;
 public class YtDlpService
 {
     private readonly string _ytdlpPath;
-    private readonly string? _cookiesPath;
-    
     public string CarpetaDestino { get; set; }
     public string? NavegadorCookies { get; set; }
+    public string? RutaArchivoCookies { get; set; }
 
     public string CarpetaMusica => Path.Combine(CarpetaDestino, "Musica");
     public string CarpetaVideos => Path.Combine(CarpetaDestino, "Videos");
@@ -24,7 +23,7 @@ public class YtDlpService
     public YtDlpService(string ytdlpPath, string carpetaDestino, string? cookiesPath = null)
     {
         _ytdlpPath = ytdlpPath;
-        _cookiesPath = cookiesPath;
+        RutaArchivoCookies = cookiesPath;
         CarpetaDestino = carpetaDestino;
     }
 
@@ -104,7 +103,7 @@ public class YtDlpService
             }
             else if (msjError.Contains("Failed to decrypt with DPAPI", StringComparison.OrdinalIgnoreCase))
             {
-                msjError = "ATENCIÓN: Las nuevas versiones de Chrome/Edge/Brave bloquean el acceso a las cookies por seguridad.\nPor favor, selecciona 'firefox' en el menú de navegadores de abajo, ya que no tiene este problema.";
+                msjError = "ATENCIÓN: Las nuevas versiones de Chrome/Edge bloquean el acceso a las cookies.\nPara solucionarlo: Instala la extensión 'Get cookies.txt LOCALLY' en Chrome, exporta tus cookies, y usa el botón 'Cargar Archivo...' abajo.";
             }
             else if (msjError.Contains("JavaScript runtime", StringComparison.OrdinalIgnoreCase))
             {
@@ -119,8 +118,8 @@ public class YtDlpService
 
     private IEnumerable<string> ArgsCookies()
     {
-        if (_cookiesPath is not null)
-            return new[] { "--cookies", _cookiesPath };
+        if (!string.IsNullOrWhiteSpace(RutaArchivoCookies) && File.Exists(RutaArchivoCookies))
+            return new[] { "--cookies", RutaArchivoCookies };
 
         if (!string.IsNullOrWhiteSpace(NavegadorCookies))
             return new[] { "--cookies-from-browser", NavegadorCookies };
@@ -142,7 +141,7 @@ public class YtDlpService
     /// </summary>
     private async Task<string> ConReintentoAsync(Func<bool, IEnumerable<string>> construirArgs, IProgress<double>? progress = null)
     {
-        if (_cookiesPath is not null)
+        if (!string.IsNullOrWhiteSpace(RutaArchivoCookies) || !string.IsNullOrWhiteSpace(NavegadorCookies))
         {
             try
             {
