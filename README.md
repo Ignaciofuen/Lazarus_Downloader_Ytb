@@ -18,12 +18,13 @@ Una aplicación de escritorio moderna y de estética cyberpunk construida en **C
 
 ## 🚀 Características Principales
 
-*   **Interfaz Cyberpunk (Lazarus Theme):** UI moderna, con animaciones fluidas, paleta oscura y detalles en colores neón (Cyan, Púrpura y Dorado).
+*   **Interfaz Cyberpunk (Lazarus Theme):** UI moderna, con animaciones fluidas matemáticas, paleta oscura y detalles en colores neón (Cyan, Púrpura y Dorado).
+*   **Diseño 100% Adaptativo (Responsive):** La barra de herramientas y los botones se ajustan dinámicamente si cambias el tamaño de la ventana.
 *   **Descarga de Audio:** Extrae la mejor calidad en `MP3`, `FLAC` o `WAV`. Incrusta la portada (Thumbnail) y los metadatos automáticamente.
 *   **Descarga de Video:** Consulta y extrae las resoluciones reales disponibles en los servidores (desde 144p hasta 4K) multiplexando el mejor audio y video.
-*   **Bypass Anti-Bloqueos (Cookies):** Soporte nativo para evadir el Error 429 de YouTube inyectando de forma segura las cookies de tu navegador web preferido (Chrome, Firefox, Brave, Edge, Opera).
+*   **Bypass Extremo (Cookies):** Además del soporte nativo para navegadores (Firefox, Brave), incluye carga directa de **archivos `cookies.txt`** con persistencia en memoria, ideal para saltar los recientes bloqueos de encriptación de Chrome/Edge (DPAPI).
 *   **Auto-Actualizador:** Botón integrado en la interfaz para descargar la versión más reciente del motor interno, manteniéndote siempre a prueba de los cambios en el código de YouTube.
-*   **Gestión de Descargas Optimizada:** Barra de progreso que no congela la interfaz (UI Throttling) y botones de acceso directo a la carpeta de descarga.
+*   **Gestión de Descargas Optimizada:** Barra de progreso estabilizada a 20 FPS (Smooth Animation) que evita que la interfaz se congele con conexiones a internet ultrarrápidas.
 
 ---
 
