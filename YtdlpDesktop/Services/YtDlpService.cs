@@ -78,8 +78,8 @@ public class YtDlpService
                     if (match.Success && double.TryParse(match.Groups["percent"].Value, System.Globalization.CultureInfo.InvariantCulture, out double p))
                     {
                         var now = DateTime.Now;
-                        // Evita saturar el hilo de la UI: actualiza máximo cada 200ms o si avanzó 1%
-                        if ((now - lastReportTime).TotalMilliseconds > 200 || Math.Abs(p - lastPercent) >= 1.0)
+                        // Renderizado fluido a 20 FPS (cada 50ms) para evitar congelamientos en internet rápido.
+                        if ((now - lastReportTime).TotalMilliseconds > 50 || p >= 100)
                         {
                             lastReportTime = now;
                             lastPercent = p;
