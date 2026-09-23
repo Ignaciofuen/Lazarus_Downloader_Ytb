@@ -164,7 +164,7 @@
                     <TextBlock Text="NAVEGADOR:" Foreground="#6B7280" FontWeight="Bold" FontSize="10" VerticalAlignment="Center" Margin="0,0,8,0" />
                     <ComboBox ItemsSource="{Binding NavegadoresDisponibles}"
                               SelectedItem="{Binding NavegadorCookiesSeleccionado, UpdateSourceTrigger=PropertyChanged}"
-                              Width="80" Background="#1A1E26" Foreground="White" BorderBrush="#4d38E4B7" BorderThickness="1" Padding="4,2" Cursor="Hand">
+                              Width="80" Foreground="Black" BorderBrush="#4d38E4B7" BorderThickness="1" Padding="4,2" Cursor="Hand">
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="ComboBoxItem">
                                 <Setter Property="Foreground" Value="Black" />
