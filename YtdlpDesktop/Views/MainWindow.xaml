@@ -154,8 +154,8 @@
                             ToolTip="Haz clic aquí para ir a la tienda de Chrome e instalar la extensión necesaria."/>
                     
                     <StackPanel Orientation="Horizontal" Visibility="{Binding ArchivoCookies, Converter={StaticResource TextoAVisibilidad}}">
-                        <TextBlock Text="Cargado" Foreground="#38E4B7" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,4,0"/>
-                        <Button Content="❌" Command="{Binding QuitarArchivoCookiesCommand}" Foreground="#EF4444" Background="Transparent" BorderThickness="0" Cursor="Hand" Padding="2,0"/>
+                        <TextBlock Text="Capturadas" Foreground="#38E4B7" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                        <Button Content="❌" Command="{Binding QuitarArchivoCookiesCommand}" Foreground="#EF4444" Background="Transparent" BorderThickness="0" Cursor="Hand" Padding="2,0" ToolTip="Quitar archivo de cookies"/>
                     </StackPanel>
                 </StackPanel>
 
